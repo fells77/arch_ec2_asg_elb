@@ -59,7 +59,7 @@ resource "aws_autoscaling_group" "meeseeks_box" {
         propagate_at_launch = true
     }
     tag {
-        key                 = "deployment_owner"
+        key                 = "DeploymentOwner"
         value               = var.tag_deployment_owner
         propagate_at_launch = true
     }
