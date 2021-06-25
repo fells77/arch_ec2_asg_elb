@@ -15,18 +15,24 @@ variable "s3_bucket_name" {
     description = "Pre-existing S3 bucket for statefiles"
 }
 
+variable "tag_deployment_owner" {
+    description = "Email/identifier of the person deploying this asset"
+}
+
 variable "tag_owner_contact" {
     description = "Email/identifier of group supporting the application"
 }
 
-variable "tag_deployment_owner" {
-    description = "Email/identifier of the person deploying this asset"
-}
 
 
 # AWS infrastructure variables
 variable "ami_id" {
     description = "The ID of the AMI you're using"
+}
+
+variable "asg_desired_size" {
+    description = "Normal (BAU) # of instances in your autoscaling group"
+    default = 1
 }
 
 variable "asg_max_size" {
@@ -39,19 +45,14 @@ variable "asg_min_size" {
     default = 1
 }
 
-variable "asg_desired_size" {
-    description = "Normal (BAU) # of instances in your autoscaling group"
-    default = 1
+variable "ebs_volume_size" {
+    description = "EBS volume size (in GB)"
+    default = 20
 }
 
 variable "ebs_volume_type" {
     description = "https://aws.amazon.com/ebs/volume-types/"
     default = "gp2"
-}
-
-variable "ebs_volume_size" {
-    description = "EBS volume size (in GB)"
-    default = 20
 }
 
 variable "iam_role" {
