@@ -1,19 +1,33 @@
+# Generic variables
 variable "app_name" {
-    default = ""
+    description = "Your app name; use [a-zA-Z0-9_-] for best results"
 }
 
 variable "aws_region" {
-    default = ""
+    description = "The AWS region you're deploying to.  For example, 'us-east-1'"
 }
 
 variable "ami_id" {
-    default = ""
+    description = "The ID of the AMI you're using"
 }
 
 variable "deploy_env" {
-    default = ""
+    description = "The environment (dev/qa/prod/...) you're deploying to"
 }
 
+variable "s3_bucket_name" {
+    description = "Pre-existing S3 bucket for statefiles"
+}
+
+variable "tag_owner_contact" {
+    description = "Email/identifier of group supporting the application"
+}
+
+variable "tag_deployment_owner" {
+    description = "Email/identifier of the person deploying this asset"
+}
+
+# AWS infrastructure variables
 variable "asg_max_size" {
     default = 1
 }
@@ -26,10 +40,6 @@ variable "asg_desired_size" {
     default = 1
 }
 
-variable "instance_type" {
-    default = "t2.micro"
-}
-
 variable "ebs_volume_type" {
     default = "gp2"
 }
@@ -38,14 +48,18 @@ variable "ebs_volume_size" {
     default = 20
 }
 
-variable "s3_bucket_name" {
-    default = ""
+variable "iam_role" {
+    description = "The IAM role your EC2 will use to connect to other services"
 }
 
-variable "tag_owner_contact" {
-    defaut = ""
+variable "instance_type" {
+    default = "t2.micro"
 }
 
-variable "tag_deployment_owner" {
-    default = ""
+variable "listeners" {
+    description = "Ingress port configurations for load balancer"
+}
+
+variable "security_groups" {
+    description = "Security group(s) specific to this architecture and/or application"
 }
