@@ -7,10 +7,6 @@ variable "aws_region" {
     description = "The AWS region you're deploying to.  For example, 'us-east-1'"
 }
 
-variable "ami_id" {
-    description = "The ID of the AMI you're using"
-}
-
 variable "deploy_env" {
     description = "The environment (dev/qa/prod/...) you're deploying to"
 }
@@ -27,24 +23,34 @@ variable "tag_deployment_owner" {
     description = "Email/identifier of the person deploying this asset"
 }
 
+
 # AWS infrastructure variables
+variable "ami_id" {
+    description = "The ID of the AMI you're using"
+}
+
 variable "asg_max_size" {
+    description = "Max # of instances in your autoscaling group"
     default = 1
 }
 
 variable "asg_min_size" {
+    description = "Min # of instances in your autoscaling group"
     default = 1
 }
 
 variable "asg_desired_size" {
+    description = "Normal (BAU) # of instances in your autoscaling group"
     default = 1
 }
 
 variable "ebs_volume_type" {
+    description = "https://aws.amazon.com/ebs/volume-types/"
     default = "gp2"
 }
 
 variable "ebs_volume_size" {
+    description = "EBS volume size (in GB)"
     default = 20
 }
 
@@ -53,7 +59,8 @@ variable "iam_role" {
 }
 
 variable "instance_type" {
-    default = "t2.micro"
+    description = "https://aws.amazon.com/ec2/instance-types/"
+    default = "m5.large"
 }
 
 variable "listeners" {
