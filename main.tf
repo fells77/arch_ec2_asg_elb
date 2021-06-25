@@ -1,20 +1,20 @@
 /*
 These are the required fields needed to leverage this module:
 
-    app_name                = var.app_name                      # Your app name; use [a-zA-Z_-] for best results
-    aws_region              = var.aws_region                    # THe region you're deploying to
-    ami_id                  = var.ami_id                        # The ID of the AMI you're using
-    deploy_env              = var.deploy_env                    # The environment (dev/qa/prod) you're deploying to
-    asg_max_size            = var.asg_max_size                  # Max number of instances in your autoscaling group
-    asg_min_size            = var.asg_min_size                  # Min number of instances in your autoscaling group
-    asg_desired_size        = var.asg_desired_size              # The desired (BAU) number of instances in your autoscaling group
-    instance_type           = var.instance_type                 # The AWS instance type (such a "t2.micro") for your instances
-    volume_type             = var.ebs_volume_type               # The type of disk your EC2 will use, suggest "gp2"
-    volume_size             = var.ebs_volume_size               # The size (in GB) of your EC2 disk space
-    s3_bucket_name          = var.s3_bucket_name                # You need a pre-existing S3 bucket for statefiles
-    tag_owner_contact       = var.tag_owner_contact             # Email/identifier of group supporting the application
-    tag_deployment_owner    = var.tag_deployment_owner          # Email/identifier of the person deploying this asset
-    security_groups         = var.security_groups               # These should be created/exported from your app onfiguration
+    var.app_name                      # Your app name; use [a-zA-Z0-9_-] for best results
+    var.aws_region                    # The region you're deploying to
+    var.ami_id                        # The ID of the AMI you're using
+    var.deploy_env                    # The environment (dev/qa/prod) you're deploying to
+    var.asg_max_size                  # Max number of instances in your autoscaling group
+    var.asg_min_size                  # Min number of instances in your autoscaling group
+    var.asg_desired_size              # The desired (BAU) number of instances in your autoscaling group
+    var.instance_type                 # The AWS instance type (such a "t2.micro") for your instances
+    var.ebs_volume_type               # The type of disk your EC2 will use, suggest "gp2"
+    var.ebs_volume_size               # The size (in GB) of your EC2 disk space (int type -- no quotes)
+    var.s3_bucket_name                # You need a pre-existing S3 bucket for statefiles
+    var.tag_owner_contact             # Email/identifier of group supporting the application
+    var.tag_deployment_owner          # Email/identifier of the person deploying this asset
+    var.security_groups               # These should be created/exported from your app configuration
 
 These must be defined in your app-level configuration
 */
