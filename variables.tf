@@ -9,6 +9,7 @@ variable "aws_region" {
 
 variable "deploy_env" {
     description = "The environment (dev/qa/prod/...) you're deploying to"
+    default = "sandbox"
 }
 
 variable "s3_bucket_name" {
