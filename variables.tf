@@ -63,3 +63,7 @@ variable "listeners" {
 variable "security_groups" {
     description = "Security group(s) specific to this architecture and/or application"
 }
+
+variable "user_data" {
+    description = "userData section which gets run on each EC2 @ instantiation -- throw your app-specific install/run code here"
+}

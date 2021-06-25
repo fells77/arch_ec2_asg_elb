@@ -19,7 +19,7 @@ resource "aws_launch_configuration" "im_mr_meeseeks_look_at_me" {
     }
     name                        = "${var.app_name}-launch_configuration"
     security_groups             = split(",",var.security_groups[format("%s.%s", lower(var.app_env), lower(var.aws_region))])
-    user_data                   = []
+    user_data                   = [ var.user_data ]
 }
 
 resource "aws_autoscaling_group" "meeseeks_box" {
