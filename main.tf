@@ -72,7 +72,7 @@ resource "aws_elb" "green_portal" {
     listener                = var.listeners
     name                    = "${var.app_name}-elb"
     security_groups         = [ var.aws_security_group.elb_sg.id ]
-    subnets                 = [ var.app_subnets ]
+    subnets                 = [ var.subnets ]
     tags = {
         Application         = var.application
         DeploymentOwner     = var.deployment_owner

@@ -34,10 +34,6 @@ variable "ami_id" {
     description = "The ID of the AMI you're using"
 }
 
-variable "app_subnets" {
-    description = "Subnet(s) for the ELB to leverage"
-}
-
 variable "asg_desired_size" {
     description = "Normal (BAU) # of instances in your autoscaling group"
     default = 1
@@ -102,6 +98,10 @@ variable "listeners" {
 
 variable "security_groups" {
     description = "Security group(s) specific to this architecture and/or application"
+}
+
+variable "subnets" {
+    description = "Subnet(s) for the ELB to leverage"
 }
 
 variable "user_data" {
