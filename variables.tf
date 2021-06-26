@@ -76,7 +76,6 @@ variable "hc_interval" {
 
 variable "hc_target" {
     description = "ELB health check -- target"
-    default = "HTTP:3000/"
 }
 
 variable "hc_timeout" {
