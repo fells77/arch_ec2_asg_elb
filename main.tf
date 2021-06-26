@@ -1,8 +1,11 @@
 terraform {
     required_providers {
         aws = "~> 3.37"
-        region = var.aws_region
     }
+}
+
+provider "aws" {
+    region = var.aws_region
 }
 
 resource "aws_launch_configuration" "im_mr_meeseeks_look_at_me" {
