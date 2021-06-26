@@ -68,15 +68,7 @@ resource "aws_elb" "green_portal" {
         interval            = 30
     }
     internal = true
-    listener = [ var.listeners ]
-    /*
-    listener {
-        instance_port     = 3000
-        instance_protocol = "http"
-        lb_port           = 3000
-        lb_protocol       = "http"
-    }
-    */
+    listener = var.listeners
     name    = "${var.app_name}-elb"
     subnets = []
     tags = {
