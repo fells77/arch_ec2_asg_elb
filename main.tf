@@ -33,6 +33,7 @@ resource "aws_autoscaling_group" "meeseeks_box" {
     max_size                  = var.asg_max_size
     min_size                  = var.asg_min_size
     name                      = "${var.app_name}-asg"
+    vpc_zone_identifier       = [ var.subnets ]
     tag {
         key                 = "Name"
         value               = "${var.app_name}-cattle (or plants if you're vegetarian)"
