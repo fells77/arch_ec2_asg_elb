@@ -1,4 +1,9 @@
 # Generic variables
+variable "app_env" {
+    description = "The environment (dev/qa/prod/...) you're deploying to"
+    default = "dev"
+}
+
 variable "app_name" {
     description = "Your app name; use [a-zA-Z0-9_-] for best results"
 }
@@ -9,11 +14,6 @@ variable "app_port" {
 
 variable "aws_region" {
     description = "The AWS region you're deploying to.  For example, 'us-east-1'"
-}
-
-variable "deploy_env" {
-    description = "The environment (dev/qa/prod/...) you're deploying to"
-    default = "dev"
 }
 
 variable "s3_bucket_name" {

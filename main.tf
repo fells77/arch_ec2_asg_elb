@@ -12,7 +12,7 @@ resource "aws_launch_configuration" "im_mr_meeseeks_look_at_me" {
         encrypted   = true
     }
     #iam_instance_profile        = var.iam_role
-    image_id                    = var.ami_id[var.deploy_env]
+    image_id                    = var.ami_id[var.app_env]
     instance_type               = var.instance_type
     lifecycle {
         create_before_destroy = true
