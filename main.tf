@@ -9,8 +9,7 @@ provider "aws" {
 }
 
 resource "aws_launch_configuration" "im_mr_meeseeks_look_at_me" {
-    ebs_block_device {
-        device_name = "/dev/xvda"
+    root_block_device {
         volume_type = var.ebs_volume_type
         volume_size = var.ebs_volume_size
         encrypted   = true
