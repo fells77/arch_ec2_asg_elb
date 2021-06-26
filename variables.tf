@@ -23,11 +23,11 @@ variable "deployment_owner" {
 variable "owner_contact" {
     description = "Email/identifier of group supporting the application"
 }
-
+/*
 variable "s3_bucket_name" {
     description = "Pre-existing S3 bucket for statefiles"
 }
-
+*/
 
 # AWS infrastructure variables
 variable "ami_id" {
