@@ -96,10 +96,6 @@ variable "listeners" {
     description = "Ingress port configurations for load balancer"
 }
 
-variable "security_groups" {
-    description = "Security group(s) specific to this architecture and/or application"
-}
-
 variable "subnets" {
     description = "Subnet(s) for the ELB to leverage"
 }
