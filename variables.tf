@@ -103,3 +103,7 @@ variable "subnets" {
 variable "user_data" {
     description = "userData section which gets run on each EC2 @ instantiation -- throw your app-specific install/run code here"
 }
+
+variable "vpc_id" {
+    description = "VPC your subnets and security groups are contained in"
+}
