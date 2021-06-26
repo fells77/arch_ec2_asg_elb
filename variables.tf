@@ -91,9 +91,17 @@ variable "instance_type" {
     description = "https://aws.amazon.com/ec2/instance-types/"
     default = "m5.large"
 }
-
+/*
 variable "listeners" {
     description = "Ingress port configurations for load balancer"
+}
+*/
+variable "listener_port" {
+    default = 3000
+}
+
+variable "listener_protocol" {
+    default = "http"
 }
 
 variable "subnets" {

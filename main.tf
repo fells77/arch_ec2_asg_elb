@@ -69,7 +69,12 @@ resource "aws_elb" "green_portal" {
         interval            = var.hc_interval
     }
     internal                = true
-    listener                = [ var.listeners ]
+    listener {
+        instance_port     = var.listener_port
+        instance_protocol = var.listener_protocol
+        lb_port           = var.listener_port
+        lb_protocol       = var.listener_protocol
+    }
     name                    = "${var.app_name}-elb"
     security_groups         = [ aws_security_group.elb_sg.id ]
     subnets                 = [ var.subnets ]
