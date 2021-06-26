@@ -16,18 +16,17 @@ variable "aws_region" {
     description = "The AWS region you're deploying to.  For example, 'us-east-1'"
 }
 
-variable "s3_bucket_name" {
-    description = "Pre-existing S3 bucket for statefiles"
-}
-
-variable "tag_deployment_owner" {
+variable "deployment_owner" {
     description = "Email/identifier of the person deploying this asset"
 }
 
-variable "tag_owner_contact" {
+variable "owner_contact" {
     description = "Email/identifier of group supporting the application"
 }
 
+variable "s3_bucket_name" {
+    description = "Pre-existing S3 bucket for statefiles"
+}
 
 
 # AWS infrastructure variables

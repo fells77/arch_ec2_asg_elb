@@ -42,12 +42,12 @@ resource "aws_autoscaling_group" "meeseeks_box" {
     }
     tag {
         key                 = "OwnerContact"
-        value               = var.tag_owner_contact
+        value               = var.owner_contact
         propagate_at_launch = true
     }
     tag {
         key                 = "DeploymentOwner"
-        value               = var.tag_deployment_owner
+        value               = var.deployment_owner
         propagate_at_launch = true
     }
     depends_on = [ aws_elb.green_portal ]
@@ -75,8 +75,8 @@ resource "aws_elb" "green_portal" {
     subnets                 = [ var.app_subnets ]
     tags = {
         Application         = var.application
-        DeploymentOwner     = var.tag_deployment_owner
-        OwnerContact        = var.tag_owner_contact
+        DeploymentOwner     = var.deployment_owner
+        OwnerContact        = var.owner_contact
     }
 }
 
@@ -99,8 +99,8 @@ resource "aws_security_group" "elb_sg" {
     }
     tags = {
         Application         = var.application
-        DeploymentOwner     = var.tag_deployment_owner
-        OwnerContact        = var.tag_owner_contact
+        DeploymentOwner     = var.deployment_owner
+        OwnerContact        = var.owner_contact
     }
 }
 
@@ -123,7 +123,7 @@ resource "aws_security_group" "ec2_sg" {
     }
     tags = {
         Application         = var.application
-        DeploymentOwner     = var.tag_deployment_owner
-        OwnerContact        = var.tag_owner_contact
+        DeploymentOwner     = var.deployment_owner
+        OwnerContact        = var.owner_contact
     }
 }
