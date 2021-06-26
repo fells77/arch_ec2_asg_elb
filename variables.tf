@@ -20,10 +20,6 @@ variable "s3_bucket_name" {
     description = "Pre-existing S3 bucket for statefiles"
 }
 
-variable "subnets" {
-    description = "Pre-existing subnets for deplyoment targets"
-}
-
 variable "tag_deployment_owner" {
     description = "Email/identifier of the person deploying this asset"
 }
