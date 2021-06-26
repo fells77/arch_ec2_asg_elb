@@ -60,6 +60,7 @@ resource "aws_elb" "green_portal" {
     }
     connection_draining         = true
     connection_draining_timeout = 300
+    cross_zone_load_balancing   = true
     health_check {
         healthy_threshold   = var.hc_healthy_threshold
         unhealthy_threshold = var.unhealthy_threshold
@@ -72,7 +73,8 @@ resource "aws_elb" "green_portal" {
     name    = "${var.app_name}-elb"
     subnets = [ var.subnets ]
     tags = {
-        deployment_owner     = var.tag_deployment_owner
-        OwnerContact         = var.tag_owner_contact
+        Application         = var.application
+        DeploymentOwner     = var.tag_deployment_owner
+        OwnerContact        = var.tag_owner_contact
     }
 }
