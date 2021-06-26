@@ -59,13 +59,13 @@ resource "aws_elb" "green_portal" {
         interval      = 60
     }
     connection_draining         = true
-    connection_draining_timeout = 400
+    connection_draining_timeout = 300
     health_check {
-        healthy_threshold   = 10
-        unhealthy_threshold = 2
-        timeout             = 5
-        target              = "HTTP:3000/"
-        interval            = 30
+        healthy_threshold   = var.hc_healthy_threshold
+        unhealthy_threshold = var.unhealthy_threshold
+        timeout             = var.hc_timeout
+        target              = var.hc_target
+        interval            = var.hc_interval
     }
     internal = true
     listener = var.listeners
@@ -73,6 +73,6 @@ resource "aws_elb" "green_portal" {
     subnets = []
     tags = {
         deployment_owner     = var.tag_deployment_owner
-        OwnerContact        = var.tag_owner_contact
+        OwnerContact         = var.tag_owner_contact
     }
 }

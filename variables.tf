@@ -56,6 +56,31 @@ variable "ebs_volume_type" {
     default = "gp2"
 }
 
+variable "hc_healthy_threshold" {
+    description = "ELB health check -- healthy threshold"
+    default = 10
+}
+
+variable "hc_interval" {
+    description = "ELB health check -- interval"
+    default = 10
+}
+
+variable "hc_target" {
+    description = "ELB health check -- target"
+    default = "HTTP:3000/"
+}
+
+variable "hc_timeout" {
+    description = "ELB health check -- timeout"
+    default = 5
+}
+
+variable "hc_unhealthy_threshold" {
+    description = "ELB health check -- unhealthy threshold"
+    default = 2
+}
+
 variable "iam_role" {
     description = "The IAM role your EC2 will use to connect to other services"
 }
