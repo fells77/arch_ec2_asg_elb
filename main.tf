@@ -74,6 +74,7 @@ resource "aws_elb" "green_portal" {
         target              = var.hc_target
         interval            = var.hc_interval
     }
+    internal                = false
     listener {
         instance_port     = var.listener_port
         instance_protocol = var.listener_protocol
