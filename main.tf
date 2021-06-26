@@ -30,7 +30,7 @@ resource "aws_autoscaling_group" "meeseeks_box" {
     health_check_grace_period = 180
     health_check_type         = "EC2"
     launch_configuration      = aws_launch_configuration.im_mr_meeseeks_look_at_me.name
-    load_balancers            = aws_elb.green_portal.name
+    load_balancers            = [ aws_elb.green_portal.name ]
     max_size                  = var.asg_max_size
     min_size                  = var.asg_min_size
     name                      = "${var.app_name}-asg"
