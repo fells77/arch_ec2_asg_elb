@@ -98,6 +98,10 @@ variable "security_groups" {
     description = "Security group(s) specific to this architecture and/or application"
 }
 
+variable "subnets" {
+    description = "Subnet(s) for the ELB to leverage"
+}
+
 variable "user_data" {
     description = "userData section which gets run on each EC2 @ instantiation -- throw your app-specific install/run code here"
 }
