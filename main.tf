@@ -63,7 +63,7 @@ resource "aws_elb" "green_portal" {
     cross_zone_load_balancing   = true
     health_check {
         healthy_threshold   = var.hc_healthy_threshold
-        unhealthy_threshold = var.unhealthy_threshold
+        unhealthy_threshold = var.hc_unhealthy_threshold
         timeout             = var.hc_timeout
         target              = var.hc_target
         interval            = var.hc_interval
@@ -74,7 +74,7 @@ resource "aws_elb" "green_portal" {
     security_groups         = [ aws_security_group.elb_sg.id ]
     subnets                 = [ var.subnets ]
     tags = {
-        Application         = var.application
+        Application         = var.app_name
         DeploymentOwner     = var.deployment_owner
         OwnerContact        = var.owner_contact
     }
