@@ -57,10 +57,12 @@ resource "aws_autoscaling_group" "meeseeks_box" {
 }
 
 resource "aws_elb" "green_portal" {
+    /* User bucket needs to be properly configured first
     access_logs {
         bucket        = var.s3_bucket_name
         interval      = 60
     }
+    */
     connection_draining         = true
     connection_draining_timeout = 300
     cross_zone_load_balancing   = true
