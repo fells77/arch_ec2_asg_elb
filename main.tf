@@ -18,7 +18,7 @@ resource "aws_launch_configuration" "im_mr_meeseeks_look_at_me" {
         create_before_destroy = true
     }
     name                        = "${var.app_name}-launch_configuration"
-    security_groups             = split(",",var.security_groups[format("%s.%s", lower(var.app_env), lower(var.aws_region))])
+    security_groups             = [ var.aws_security_group.ec2_sg.id ]
     user_data                   = [ var.user_data ]
 }
 
@@ -50,7 +50,7 @@ resource "aws_autoscaling_group" "meeseeks_box" {
         value               = var.tag_deployment_owner
         propagate_at_launch = true
     }
-    depends_on = [aws_elb.green_portal]
+    depends_on = [ aws_elb.green_portal ]
 }
 
 resource "aws_elb" "green_portal" {
@@ -68,10 +68,59 @@ resource "aws_elb" "green_portal" {
         target              = var.hc_target
         interval            = var.hc_interval
     }
-    internal = true
-    listener = var.listeners
-    name    = "${var.app_name}-elb"
-    subnets = [ var.subnets ]
+    internal                = true
+    listener                = var.listeners
+    name                    = "${var.app_name}-elb"
+    security_groups         = [ var.aws_security_group.elb_sg.id ]
+    subnets                 = [ var.subnets ]
+    tags = {
+        Application         = var.application
+        DeploymentOwner     = var.tag_deployment_owner
+        OwnerContact        = var.tag_owner_contact
+    }
+}
+
+resource "aws_security_group" "elb_sg" {
+    name        = "${var.app_name}-ELB security group"
+    description = "Inbound traffic to ELB"
+    vpc_id      = var.vpc_id
+    ingress {
+        description      = "Inbound from ELB"
+        from_port        = var.app_port
+        to_port          = var.app_port
+        protocol         = "tcp"
+        cidr_blocks      = [ "0.0.0.0/0" ]
+    }
+    egress {
+        from_port        = 0
+        to_port          = 0
+        protocol         = "-1"
+        cidr_blocks      = [ "0.0.0.0/0" ]
+    }
+    tags = {
+        Application         = var.application
+        DeploymentOwner     = var.tag_deployment_owner
+        OwnerContact        = var.tag_owner_contact
+    }
+}
+
+resource "aws_security_group" "ec2_sg" {
+    name        = "${var.app_name}-EC2 security group"
+    description = "Inbound traffic to EC2 from ELB"
+    vpc_id      = var.vpc_id
+    ingress {
+        description      = "Inbound from ELB"
+        from_port        = var.app_port
+        to_port          = var.app_port
+        protocol         = "tcp"
+        security_groups  = [ var.aws_security_group.elb_sg.id ]
+    }
+    egress {
+        from_port        = 0
+        to_port          = 0
+        protocol         = "-1"
+        cidr_blocks      = [ "0.0.0.0/0" ]
+    }
     tags = {
         Application         = var.application
         DeploymentOwner     = var.tag_deployment_owner

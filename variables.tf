@@ -3,6 +3,10 @@ variable "app_name" {
     description = "Your app name; use [a-zA-Z0-9_-] for best results"
 }
 
+variable "app_port" {
+    description = "Port your application runs on"
+}
+
 variable "aws_region" {
     description = "The AWS region you're deploying to.  For example, 'us-east-1'"
 }
@@ -14,6 +18,10 @@ variable "deploy_env" {
 
 variable "s3_bucket_name" {
     description = "Pre-existing S3 bucket for statefiles"
+}
+
+variable "subnets" {
+    description = "Pre-existing subnets for deplyoment targets"
 }
 
 variable "tag_deployment_owner" {
