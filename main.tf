@@ -18,7 +18,7 @@ resource "aws_launch_configuration" "im_mr_meeseeks_look_at_me" {
         create_before_destroy = true
     }
     name                        = "${var.app_name}-launch_configuration"
-    security_groups             = [ var.aws_security_group.ec2_sg.id ]
+    security_groups             = [ aws_security_group.ec2_sg.id ]
     user_data                   = [ var.user_data ]
 }
 
@@ -71,7 +71,7 @@ resource "aws_elb" "green_portal" {
     internal                = true
     listener                = var.listeners
     name                    = "${var.app_name}-elb"
-    security_groups         = [ var.aws_security_group.elb_sg.id ]
+    security_groups         = [ aws_security_group.elb_sg.id ]
     subnets                 = [ var.subnets ]
     tags = {
         Application         = var.application
@@ -113,7 +113,7 @@ resource "aws_security_group" "ec2_sg" {
         from_port        = var.app_port
         to_port          = var.app_port
         protocol         = "tcp"
-        security_groups  = [ var.aws_security_group.elb_sg.id ]
+        security_groups  = [ aws_security_group.elb_sg.id ]
     }
     egress {
         from_port        = 0

@@ -82,11 +82,11 @@ variable "hc_unhealthy_threshold" {
     description = "ELB health check -- unhealthy threshold"
     default = 2
 }
-
+/*
 variable "iam_role" {
     description = "The IAM role your EC2 will use to connect to other services"
 }
-
+*/
 variable "instance_type" {
     description = "https://aws.amazon.com/ec2/instance-types/"
     default = "m5.large"
