@@ -39,7 +39,7 @@ resource "aws_launch_template" "im_mr_meeseeks_look_at_me" {
             Name = "test"
         }
     }
-    user_data = "${file(var.user_data_path)}"
+    user_data = filebase64(var.user_data_path)
 }
 
 resource "aws_autoscaling_group" "meeseeks_box" {
