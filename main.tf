@@ -127,7 +127,7 @@ resource "aws_security_group" "elb_sg" {
         from_port        = var.app_port
         to_port          = var.app_port
         protocol         = "tcp"
-        security_groups  = [ aws_security_group.ec2_sg.id ]
+        cidr_blocks      = [ "172.31.0.0/20" ] //using VPC CIDR; better to run 2x and get SG ID instead
     }
     tags = {
         Application         = var.app_name
