@@ -108,8 +108,8 @@ variable "subnets" {
     description = "Subnet(s) for the ELB to leverage"
 }
 
-variable "user_data" {
-    description = "userData section which gets run on each EC2 @ instantiation -- throw your app-specific install/run code here"
+variable "user_data_path" {
+    description = "EC2 data for build-time; should be path in project starting with /"
 }
 
 variable "vpc_id" {

@@ -39,7 +39,7 @@ resource "aws_launch_template" "im_mr_meeseeks_look_at_me" {
             Name = "test"
         }
     }
-    user_data = filebase64(var.user_data)
+    user_data = filebase64("${path.module}${var.user_data_path}")
 }
 
 resource "aws_autoscaling_group" "meeseeks_box" {
@@ -116,24 +116,18 @@ resource "aws_security_group" "elb_sg" {
     description = "Inbound traffic to ELB"
     vpc_id      = var.vpc_id
     ingress {
-        description      = "Inbound from ELB"
+        description      = "Inbound from world"
         from_port        = var.app_port
         to_port          = var.app_port
         protocol         = "tcp"
         cidr_blocks      = [ "0.0.0.0/0" ]
     }
-    ingress {
-        description      = "garbage test ingress"
-        from_port        = 22
-        to_port          = 22
-        protocol         = "tcp"
-        cidr_blocks      = [ "0.0.0.0/0" ]
-    }
     egress {
-        from_port        = 0
-        to_port          = 0
-        protocol         = "-1"
-        cidr_blocks      = [ "0.0.0.0/0" ]
+        description      = "Egress to target"
+        from_port        = var.app_port
+        to_port          = var.app_port
+        protocol         = "tcp"
+        security_groups  = [ aws_security_group.ec2_sg.id ]
     }
     tags = {
         Application         = var.app_name
@@ -153,10 +147,11 @@ resource "aws_security_group" "ec2_sg" {
         protocol         = "tcp"
         security_groups  = [ aws_security_group.elb_sg.id ]
     }
-    egress {
-        from_port        = 0
-        to_port          = 0
-        protocol         = "-1"
+        ingress {
+        description      = "SSH ingress"
+        from_port        = 22
+        to_port          = 22
+        protocol         = "tcp"
         cidr_blocks      = [ "0.0.0.0/0" ]
     }
     tags = {
