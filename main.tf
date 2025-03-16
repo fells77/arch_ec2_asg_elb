@@ -8,21 +8,38 @@ provider "aws" {
     region = var.aws_region
 }
 
-resource "aws_launch_configuration" "im_mr_meeseeks_look_at_me" {
-    root_block_device {
-        volume_type = var.ebs_volume_type
-        volume_size = var.ebs_volume_size
-        encrypted   = true
+resource "aws_launch_template" "im_mr_meeseeks_look_at_me" {
+    name                            = "${var.app_name}-launch_template"
+    block_device_mappings {
+        device_name                     = "/dev/sdf"
+        ebs {
+            volume_size = var.ebs_volume_size
+            encrypted   = true
+        }
     }
-    #iam_instance_profile        = var.iam_role
-    image_id                    = var.ami_id
-    instance_type               = var.instance_type
-    lifecycle {
-        create_before_destroy = true
+    ebs_optimized                   = true
+    image_id                        = var.ami_id
+    instance_type                   = var.instance_type
+    metadata_options {
+        http_endpoint               = "enabled"
+        http_tokens                 = "required"
+        http_put_response_hop_limit = 1
+        instance_metadata_tags      = "enabled"
     }
-    name                        = "${var.app_name}-launch_configuration"
-    security_groups             = [ aws_security_group.ec2_sg.id ]
-    user_data                   = var.user_data
+    monitoring {
+        enabled                     = true
+    }
+    network_interfaces {
+        associate_public_ip_address = true
+    }
+    vpc_security_group_ids          = [ aws_security_group.ec2_sg.id ]
+    tag_specifications {
+        resource_type               = "instance"
+        tags = {
+            Name = "test"
+        }
+    }
+    user_data = var.user_data
 }
 
 resource "aws_autoscaling_group" "meeseeks_box" {
