@@ -89,7 +89,6 @@ variable "iam_role" {
 */
 variable "instance_type" {
     description = "https://aws.amazon.com/ec2/instance-types/"
-    default = "m5.large"
 }
 variable "key_name" {
     description = "EC2 key pair ID for SSH access"
