@@ -20,6 +20,7 @@ resource "aws_launch_template" "im_mr_meeseeks_look_at_me" {
     ebs_optimized                   = true
     image_id                        = var.ami_id
     instance_type                   = var.instance_type
+    key_name                        = var.key_name
     metadata_options {
         http_endpoint               = "enabled"
         http_tokens                 = "required"

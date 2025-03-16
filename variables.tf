@@ -91,6 +91,9 @@ variable "instance_type" {
     description = "https://aws.amazon.com/ec2/instance-types/"
     default = "m5.large"
 }
+variable "key_name" {
+    description = "EC2 key pair ID for SSH access"
+}
 /*
 variable "listeners" {
     description = "Ingress port configurations for load balancer"
