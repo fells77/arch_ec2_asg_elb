@@ -155,6 +155,13 @@ resource "aws_security_group" "ec2_sg" {
         protocol         = "tcp"
         cidr_blocks      = [ "0.0.0.0/0" ]
     }
+    egress {
+        description      = "HTTPS out"
+        from_port        = 443
+        to_port          = 443
+        protocol         = "tcp"
+        cidr_blocks      = [ "0.0.0.0/0" ]
+    }
     tags = {
         Application         = var.app_name
         DeploymentOwner     = var.deployment_owner
