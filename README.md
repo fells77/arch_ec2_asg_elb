@@ -1,5 +1,5 @@
 # arch_ec2_asg_elb
-Terraform module for EC2/ASG/ELB architecture
+OpenTofu (replaces Terraform) module for EC2/ASG/ELB architecture
 
 
 ## Required fields
