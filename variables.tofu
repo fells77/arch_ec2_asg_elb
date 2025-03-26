@@ -1,4 +1,7 @@
 # Generic variables
+variable "alb_name" {
+    description = "Human-readable ALB name"
+}
 variable "app_env" {
     description = "The environment (dev/qa/prod/...) you're deploying to"
     default = "dev"
