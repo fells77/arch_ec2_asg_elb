@@ -78,6 +78,31 @@ resource "aws_autoscaling_group" "meeseeks_box" {
     depends_on = [ aws_elb.green_portal ]
 }
 
+resource "aws_lb" "green_portal" {
+    name               = var.alb_name
+    internal           = false
+    load_balancer_type = "application"
+    security_groups    = [aws_security_group.lb_sg.id]
+    subnets            = var.subnets
+
+    enable_deletion_protection = true
+    drop_invalid_header_fields = true
+
+/*     access_logs {
+        bucket  = aws_s3_bucket.lb_logs.id
+        prefix  = "test-lb"
+        enabled = true
+    } */
+}
+
+resource "aws_lb_target_group" "alb_tg" {
+
+}
+
+resource "aws_lb_listener" "alb_inbound" {
+
+}
+
 resource "aws_elb" "green_portal" {
     /* User bucket needs to be properly configured first
     access_logs {
@@ -112,9 +137,9 @@ resource "aws_elb" "green_portal" {
     }
 }
 
-resource "aws_security_group" "elb_sg" {
-    name        = "${var.app_name}-ELB security group"
-    description = "Inbound traffic to ELB"
+resource "aws_security_group" "lb_sg" {
+    name        = "${var.app_name}-ALB security group"
+    description = "Inbound traffic to ALB"
     vpc_id      = var.vpc_id
     ingress {
         description      = "Inbound from world"
@@ -128,7 +153,7 @@ resource "aws_security_group" "elb_sg" {
         from_port        = var.app_port
         to_port          = var.app_port
         protocol         = "tcp"
-        cidr_blocks      = [ "172.31.0.0/20" ] //using VPC CIDR; better to run 2x and get SG ID instead
+        security_groups  = [ aws_security_group.ec2_sg.id ]
     }
     tags = {
         Application         = var.app_name
@@ -146,7 +171,7 @@ resource "aws_security_group" "ec2_sg" {
         from_port        = var.app_port
         to_port          = var.app_port
         protocol         = "tcp"
-        security_groups  = [ aws_security_group.elb_sg.id ]
+        security_groups  = [ aws_security_group.alb_sg.id ]
     }
         ingress {
         description      = "SSH ingress"
